@@ -12,6 +12,7 @@
 .main-navigation__logo h1 {
   margin: 0;
   font-size: 1.5rem;
+  cursor: default;
 }
 .main-navigation__item {
   margin-left: 1.5rem;

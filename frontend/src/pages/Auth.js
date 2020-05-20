@@ -8,13 +8,13 @@ class AuthPage extends Component {
     isLogin: true,
   };
 
+  static contextType = AuthContext;
+
   constructor(props) {
     super(props);
     this.emailEl = React.createRef();
     this.passwordEl = React.createRef();
   }
-
-  static contextType = AuthContext;
 
   switchModeHandler = () => {
     this.setState((prevState) => {
@@ -33,28 +33,25 @@ class AuthPage extends Component {
 
     let requestBody = {
       query: `
-            query {
-                login(email: "${email}", password: "${password}") {
-                userId
-                token
-                tokenExpiration
-                }
-            }
-        `,
+        query {
+          login(email: "${email}", password: "${password}") {
+            userId
+            token
+            tokenExpiration
+          }
+        }
+      `,
     };
 
     if (!this.state.isLogin) {
       requestBody = {
         query: `
-            mutation {
-                createUser(userInput: {
-                    email: "${email}",
-                    password: "${password}"
-                }) {
-                    _id
-                    email
-                }
+          mutation {
+            createUser(userInput: {email: "${email}", password: "${password}"}) {
+              _id
+              email
             }
+          }
         `,
       };
     }
@@ -68,7 +65,7 @@ class AuthPage extends Component {
     })
       .then((res) => {
         if (res.status !== 200 && res.status !== 201) {
-          throw new Error("FAILED");
+          throw new Error("Failed!");
         }
         return res.json();
       })
@@ -91,11 +88,11 @@ class AuthPage extends Component {
       <form className="auth-form" onSubmit={this.submitHandler}>
         <div className="form-control">
           <label htmlFor="email">E-Mail</label>
-          <input type="email" id="email" ref={this.emailEl}></input>
+          <input type="email" id="email" ref={this.emailEl} />
         </div>
         <div className="form-control">
           <label htmlFor="password">Password</label>
-          <input type="password" id="password" ref={this.passwordEl}></input>
+          <input type="password" id="password" ref={this.passwordEl} />
         </div>
         <div className="form-actions">
           <button type="submit">Submit</button>

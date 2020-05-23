@@ -12,6 +12,11 @@
   box-sizing: border-box;
 }
 
+.main-navigation__logo h1:hover,
+.main-navigation__logo:hover {
+  cursor: default;
+}
+
 .main-navigation__logo h1 {
   margin: 0;
   font-size: 1.5rem;

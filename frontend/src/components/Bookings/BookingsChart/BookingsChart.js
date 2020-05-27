@@ -7,11 +7,11 @@ const BOOKINGS_BUCKETS = {
     max: 100,
   },
   Normal: {
-    min: 100,
+    min: 101,
     max: 200,
   },
   Expensive: {
-    min: 200,
+    min: 201,
     max: Number.POSITIVE_INFINITY,
   },
 };
@@ -22,8 +22,8 @@ const bookingsChart = (props) => {
   for (const bucket in BOOKINGS_BUCKETS) {
     const filteredBookingsCount = props.bookings.reduce((prev, current) => {
       if (
-        current.event.price > BOOKINGS_BUCKETS[bucket].min &&
-        current.event.price < BOOKINGS_BUCKETS[bucket].max
+        current.event.price >= BOOKINGS_BUCKETS[bucket].min &&
+        current.event.price <= BOOKINGS_BUCKETS[bucket].max
       ) {
         return prev + 1;
       } else {
